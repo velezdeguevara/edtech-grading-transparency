@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment / secrets
+.env
+.env.*
+*.local
+
+# Notebooks
+.ipynb_checkpoints/
+
+# ML / model artifacts & caches
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.gguf
+.cache/
+wandb/
+outputs/
+checkpoints/
+
+# Hugging Face / datasets cache
+.hf_cache/
+hf_home/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Data — never commit real student data; keep only synthetic fixtures explicitly
+data/**/*.real

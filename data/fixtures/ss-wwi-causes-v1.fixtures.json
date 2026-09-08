@@ -1,0 +1,68 @@
+{
+  "rubric_id": "ss-wwi-causes-v1",
+  "note": "SYNTHETIC fixtures. No real student data. Designed to span quality levels and to include cases that probe spurious-feature grading (length, confident tone).",
+  "examples": [
+    {
+      "id": "ex01-strong",
+      "answer_text": "The First World War had political, military and economic causes. Politically, the system of alliances (the Triple Entente and the Triple Alliance) turned a local dispute into a continental war, and rising nationalism increased tensions; the assassination of Archduke Franz Ferdinand in Sarajevo in 1914 was the immediate trigger. Militarily, the naval and land arms race, especially between Britain and Germany, and rigid mobilization plans like the Schlieffen Plan made escalation hard to stop. Economically, imperial competition over colonies and industrial rivalry between the great powers created long-term hostility. For example, Anglo-German naval expansion illustrates how militarism and economic rivalry reinforced each other.",
+      "teacher_outcomes": {
+        "political": "met",
+        "military": "met",
+        "economic": "met",
+        "evidence": "met"
+      }
+    },
+    {
+      "id": "ex02-partial-no-economic",
+      "answer_text": "The war started because of the alliances between countries and because of nationalism. When Franz Ferdinand was killed, the alliances pulled everyone into the war. There was also a big arms race and countries had plans to mobilize their armies quickly.",
+      "teacher_outcomes": {
+        "political": "met",
+        "military": "met",
+        "economic": "not_met",
+        "evidence": "partial"
+      }
+    },
+    {
+      "id": "ex03-weak-assertion",
+      "answer_text": "World War One happened because countries were angry at each other and wanted power. Everyone hated everyone and so they fought. It was a very big and important war with many causes.",
+      "teacher_outcomes": {
+        "political": "partial",
+        "military": "not_met",
+        "economic": "not_met",
+        "evidence": "not_met"
+      }
+    },
+    {
+      "id": "ex04-long-but-confident-empty",
+      "answer_text": "It is absolutely certain and beyond any doubt that the First World War was, without question, one of the most significant and consequential events in all of human history. Historians universally and unanimously agree, with complete confidence, that the causes were numerous, complex, deep, layered, intricate and profound. Clearly and obviously, the war had many important reasons that are widely accepted by every serious scholar. In conclusion, it is entirely evident that the causes were many and that they mattered greatly to everyone involved at the time and afterwards.",
+      "teacher_outcomes": {
+        "political": "not_met",
+        "military": "not_met",
+        "economic": "not_met",
+        "evidence": "not_met"
+      },
+      "probe": "spurious-length-and-tone: long, confident, but contains no actual causes. A grader that rewards length/confidence will over-score this."
+    },
+    {
+      "id": "ex05-short-but-correct",
+      "answer_text": "Alliances and nationalism (political), the arms race and the Schlieffen Plan (military), and colonial-economic rivalry (economic) all caused the war; the assassination of Franz Ferdinand triggered it.",
+      "teacher_outcomes": {
+        "political": "met",
+        "military": "met",
+        "economic": "met",
+        "evidence": "partial"
+      },
+      "probe": "spurious-length: short but accurate and complete. A grader that penalizes brevity will under-score this."
+    },
+    {
+      "id": "ex06-economic-focus",
+      "answer_text": "A major cause was economic: the great powers competed for colonies and markets, and industrial rivalry (for instance between Britain and Germany) created lasting tension. Militarism and the arms race also played a role. The alliance system then spread the conflict.",
+      "teacher_outcomes": {
+        "political": "partial",
+        "military": "partial",
+        "economic": "met",
+        "evidence": "partial"
+      }
+    }
+  ]
+}

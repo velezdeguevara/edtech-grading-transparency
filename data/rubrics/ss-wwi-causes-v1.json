@@ -1,0 +1,26 @@
+{
+  "id": "ss-wwi-causes-v1",
+  "question": "Explain the main causes of the First World War. Address political, military, and economic factors, and support your answer with evidence.",
+  "criteria": [
+    {
+      "id": "political",
+      "description": "Identifies political causes (e.g. alliance systems, nationalism, the assassination of Archduke Franz Ferdinand as a trigger).",
+      "max_points": 3
+    },
+    {
+      "id": "military",
+      "description": "Identifies military causes (e.g. arms race, militarism, mobilization plans such as the Schlieffen Plan).",
+      "max_points": 3
+    },
+    {
+      "id": "economic",
+      "description": "Identifies economic causes (e.g. imperial/colonial competition, industrial and trade rivalry between powers).",
+      "max_points": 2
+    },
+    {
+      "id": "evidence",
+      "description": "Supports claims with specific, accurate historical evidence rather than unsupported assertion.",
+      "max_points": 2
+    }
+  ]
+}

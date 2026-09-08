@@ -1,0 +1,10 @@
+# Core Machine Learning Framework
+torch>=2.0.0
+numpy>=1.24.0
+
+# Tensor Manipulation & Typing (ARENA Chapter 0)
+einops>=0.6.1
+jaxtyping>=0.2.20
+
+# Audit & Evaluation Testing
+pytest>=7.3.1

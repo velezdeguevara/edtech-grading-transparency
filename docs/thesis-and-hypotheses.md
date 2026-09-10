@@ -64,7 +64,7 @@ class of questions answerable only under Track A.
 |---|---|---|
 | Grading quality | Agreement with teacher grades (exact + within-1); per-criterion accuracy | `evals/agreement/` |
 | Calibration | Confidence vs. correctness; reliability curves; ECE | `evals/calibration/` |
-| Bias / fairness | Sensitivity to answer length, tone, style, demographic proxies | `evals/bias-fairness/` |
+| Bias / fairness | Sensitivity to answer length, tone, style, demographic proxies | `evals/bias_fairness/` |
 | Robustness | Behavior on adversarial answers & prompt injection in student text | `evals/robustness/` |
 | Auditability | Depth-of-explanation an auditor can obtain; questions answerable per track | `evals/auditability/` |
 | Human effort | Teacher override rate; time-to-review; residual-case difficulty | `reports/grading-audit/` |

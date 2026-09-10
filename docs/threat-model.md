@@ -39,7 +39,7 @@ Teachers rubber-stamp proposed grades, defeating human-in-the-loop.
 
 ### T6 — Bias & fairness harms
 Systematic disadvantage to groups via proxies in writing.
-- *Mitigations:* `evals/bias-fairness/`; Track A proxy-feature inspection; documented limits
+- *Mitigations:* `evals/bias_fairness/`; Track A proxy-feature inspection; documented limits
   for Track B.
 
 ### T7 — Data leakage / PII

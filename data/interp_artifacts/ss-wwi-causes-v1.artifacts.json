@@ -1,0 +1,37 @@
+{
+  "rubric_id": "ss-wwi-causes-v1",
+  "placeholder": true,
+  "note": "SYNTHETIC PLACEHOLDER interpretability artifacts. These are hand-authored to exercise the Mode 1 pipeline and escalation logic; they are NOT real model captures. A Mode 3 cloud run (interpretability/cloud_gemma_scope.ipynb) overwrites this file with genuine Gemma-2-2b + Gemma Scope captures, at which point 'placeholder' becomes false.",
+  "signals": {
+    "ex01-strong": {
+      "content_attribution": {"political": 0.92, "military": 0.90, "economic": 0.88, "evidence": 0.85},
+      "spurious_feature_activation": {"confident_tone": 0.10, "length": 0.15},
+      "notes": "content-driven across criteria"
+    },
+    "ex02-partial-no-economic": {
+      "content_attribution": {"political": 0.86, "military": 0.83, "economic": 0.30, "evidence": 0.60},
+      "spurious_feature_activation": {"confident_tone": 0.12, "length": 0.20},
+      "notes": "content-driven; economic weak as expected"
+    },
+    "ex03-weak-assertion": {
+      "content_attribution": {"political": 0.55, "military": 0.35, "economic": 0.30, "evidence": 0.25},
+      "spurious_feature_activation": {"confident_tone": 0.35, "length": 0.30},
+      "notes": "some reliance on assertive phrasing"
+    },
+    "ex04-long-but-confident-empty": {
+      "content_attribution": {"political": 0.20, "military": 0.18, "economic": 0.15, "evidence": 0.12},
+      "spurious_feature_activation": {"confident_tone": 0.88, "length": 0.82},
+      "notes": "PROBE: score would rely heavily on length/confident tone, not content -> should escalate"
+    },
+    "ex05-short-but-correct": {
+      "content_attribution": {"political": 0.90, "military": 0.89, "economic": 0.87, "evidence": 0.70},
+      "spurious_feature_activation": {"confident_tone": 0.08, "length": 0.10},
+      "notes": "PROBE: short but content-driven -> should NOT be penalised/escalated"
+    },
+    "ex06-economic-focus": {
+      "content_attribution": {"political": 0.60, "military": 0.58, "economic": 0.88, "evidence": 0.62},
+      "spurious_feature_activation": {"confident_tone": 0.15, "length": 0.22},
+      "notes": "content-driven with economic emphasis"
+    }
+  }
+}

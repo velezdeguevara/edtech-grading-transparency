@@ -1,0 +1,36 @@
+# Interpretability dependencies — Modes 2 (local real) and 3 (cloud) ONLY.
+#
+# These are NOT required for Mode 1 (offline artifact proof), which the core
+# requirements.txt already covers (numpy, einops, jaxtyping, pytest).
+#
+# Install ONLY in a torch-capable environment (a machine with enough RAM, or a
+# cloud GPU):
+#
+#     pip install -r requirements-interp.txt
+#
+# Notes:
+# - torch: pick the build matching your hardware. The plain "torch" below is the
+#   default (CPU or CUDA auto-selected by pip on many platforms). For a specific
+#   CUDA build, follow https://pytorch.org/get-started/locally/ instead.
+# - Model WEIGHTS are downloaded separately on first use (not by pip):
+#     * GPT-2-small  (~500 MB, no license, downloads automatically)
+#     * Gemma-2-2b   (~5 GB, GATED: needs a Hugging Face account + accepted
+#                     license + HF token) — Mode 3 / capable Mode 2 only
+#     * Gemma Scope SAEs (separate Hugging Face download)
+
+# Core tensor / model runtime
+torch>=2.0.0
+transformers>=4.42.0        # Gemma-2 support
+safetensors>=0.4.0
+
+# Mechanistic interpretability ("lens" + SAEs)
+transformer_lens>=2.0.0     # activation hooks, logit lens, activation patching, attention
+sae_lens>=3.0.0             # loading/running SAEs incl. Gemma Scope
+
+# Hugging Face access (weights download + auth for gated models)
+huggingface_hub>=0.23.0
+datasets>=2.19.0
+
+# Numerics / plotting for interp visualisations (logit-lens-viz, sae-feature-maps)
+numpy>=1.24.0
+matplotlib>=3.7.0

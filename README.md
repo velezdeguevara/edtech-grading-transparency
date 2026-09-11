@@ -34,6 +34,7 @@ Both tracks share the same scaffolding (`src/common`) and the **same evaluation 
 | `docs/design.md` | Architecture + the explainability-vs-interpretability distinction |
 | `docs/thesis-and-hypotheses.md` | Falsifiable hypotheses (H1–H5) and success metrics |
 | `docs/auditability.md` | What an auditor can/can't be told under each track |
+| `docs/running-modes.md` | The three run modes (offline proof / local / cloud) and hardware needs |
 | `docs/threat-model.md` | Adversarial & safety considerations |
 | `src/common/` | Shared: rubrics, RAG, grading orchestration, human review |
 | `src/track_a_interpretable/` | Open-weight grader + interp integration |

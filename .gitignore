@@ -35,6 +35,10 @@ checkpoints/
 # Hugging Face / datasets cache
 .hf_cache/
 hf_home/
+# HF tokens / credentials — never commit
+.huggingface/
+*.hf_token
+hf_token*
 
 # Test / coverage
 .pytest_cache/

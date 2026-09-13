@@ -70,14 +70,14 @@ Force a mode with `INTERP_MODE=artifact|local|cloud`; it auto-detects and falls 
 | `src/common/grading/` | Shared schema, model-agnostic `Grader` interface, keyword baseline | ✅ |
 | `src/common/rubrics/` | Rubric + fixture loaders | ✅ |
 | `src/common/rag/` | Retrieval of rubric criteria / references | 🔲 planned |
-| `src/common/human_review/` | Override capture, approval, escalation routing | 🔲 planned |
+| `src/common/human_review/` | Routing (auto-accept vs escalate), teacher approve/override, append-only audit log, override-rate summary | ✅ |
 | `src/track_a_interpretable/` | Interp backends (artifact / torch), escalation logic, interpretable grader | ✅ |
 | `src/track_b_explainable/` | Vendor-neutral grader + OpenAI-compatible / mock providers | ✅ |
 | `evals/agreement`, `calibration`, `bias_fairness`, `auditability` | The scientific centerpiece | ✅ |
 | `evals/robustness/` | Adversarial answers, prompt injection | 🔲 planned |
 | `interpretability/` | Cloud notebook + technique write-ups (logit lens, SAEs, patching, attention) | ◑ notebook stub; techniques planned |
 | `data/` | Example rubrics + **synthetic** fixtures + placeholder interp artifacts | ✅ |
-| `ui/` | Demo: take an example test, see grade + explanation + interpretability view | 🔲 planned |
+| `ui/` | Stdlib CLI demo of the human-review flow (`python -m ui.review_cli`); optional visual sandbox is future | ◑ CLI demo; visual sandbox planned |
 | `reports/` | Interp findings + grading-audit / comparison write-ups | 🔲 planned |
 
 Legend: ✅ implemented · ◑ partial/stub · 🔲 planned
@@ -90,12 +90,14 @@ Legend: ✅ implemented · ◑ partial/stub · 🔲 planned
 
 ## Status
 
-**Implemented and tested (36 passing tests):** the shared grading contract and rubric/fixture
+**Implemented and tested (47 passing tests):** the shared grading contract and rubric/fixture
 loaders; the full eval suite (agreement, calibration, bias-fairness, and the H3 escalation
-eval); the vendor-neutral Track B grader (mock default + OpenAI-compatible provider); and the
+eval); the vendor-neutral Track B grader (mock default + OpenAI-compatible provider); the
 Track A interpretability groundwork (artifact backend for Mode 1, torch-lazy backend for
-Modes 2/3, escalation policy, and the interpretable grader that flags spurious-reliance).
+Modes 2/3, escalation policy, and the interpretable grader that flags spurious-reliance); and
+the human-in-the-loop review layer (routing, teacher approve/override, append-only audit log,
+override-rate summary) with a stdlib CLI demo (`python -m ui.review_cli`).
 
-**Planned next:** the human-review layer (consume the escalation flag), the RAG layer, the
-`robustness` eval, real model runs (Track B via API; Track A/Mode 3 via the cloud notebook to
-replace placeholder artifacts with genuine Gemma captures), and the demo UI.
+**Planned next:** the RAG layer, the `robustness` eval, real model runs (Track B via API;
+Track A/Mode 3 via the cloud notebook to replace placeholder artifacts with genuine Gemma
+captures), and an optional visual sandbox UI.

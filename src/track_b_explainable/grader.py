@@ -40,10 +40,15 @@ _VALID_OUTCOMES = {o.value for o in CriterionOutcome}
 class ExplainableGrader(Grader):
     name = "track-b-explainable"
 
-    def __init__(self, provider: Provider | None = None) -> None:
+    def __init__(self, provider: Provider | None = None, retriever=None) -> None:
         self.provider = provider or MockProvider()
+        # Optional RAG: when a retriever is supplied, retrieved reference material is
+        # injected into the prompt to ground the grade. Backwards-compatible: with no
+        # retriever the grader behaves exactly as before.
+        self.retriever = retriever
+        suffix = "+rag" if retriever is not None else ""
         # Reflect the backend in the name so eval outputs are self-describing.
-        self.name = f"track-b-explainable[{self.provider.name}]"
+        self.name = f"track-b-explainable[{self.provider.name}{suffix}]"
 
     def _build_user_prompt(self, rubric: Rubric, answer_text: str) -> str:
         criteria_lines = []
@@ -53,9 +58,20 @@ class ExplainableGrader(Grader):
                 f"- id: {c.id}\n  description: {c.description}\n  max_points: {c.max_points}"
             )
         criteria_block = "\n".join(criteria_lines)
+
+        grounding_block = ""
+        if self.retriever is not None:
+            # Lazy import keeps the grader usable without the rag package on the path.
+            from src.common.rag.grounding import ground
+
+            result = ground(self.retriever, rubric.question, answer_text)
+            if result.context_block:
+                grounding_block = f"{result.context_block}\n\n"
+
         return (
             f"QUESTION:\n{rubric.question}\n\n"
             f"RUBRIC_CRITERIA:\n{criteria_block}\n\n"
+            f"{grounding_block}"
             f"<STUDENT_ANSWER>\n{answer_text}\n</STUDENT_ANSWER>\n\n"
             "Grade the answer against each criterion and return the JSON object."
         )

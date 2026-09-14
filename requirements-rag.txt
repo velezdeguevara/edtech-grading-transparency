@@ -1,0 +1,15 @@
+# Optional RAG dependencies — the DENSE (semantic) retriever tier ONLY.
+#
+# NOT required to run the repository. The core default retriever is BM25Retriever
+# (pure standard library, zero install). Install these only if you want dense,
+# semantic retrieval via src/common/rag/dense.py:
+#
+#     pip install -r requirements-rag.txt
+#
+# The embedding MODEL is downloaded at runtime from Hugging Face on first use
+# (cached to ~/.cache/huggingface), not by pip. Recommended models:
+#   - Local / foundational (default): intfloat/multilingual-e5-small  (~47M params)
+#   - Enterprise production:          BAAI/bge-m3                      (~568M params)
+
+sentence-transformers>=2.7.0
+numpy>=1.24.0

@@ -1,0 +1,36 @@
+{
+  "rubric_id": "ss-wwi-causes-v1",
+  "note": "SYNTHETIC reference and marking-guidance snippets for grounding grades of the WWI-causes rubric. No real student data. These are the retrievable knowledge base alongside the rubric criteria themselves.",
+  "documents": [
+    {
+      "id": "ref-political",
+      "kind": "reference",
+      "criterion_id": "political",
+      "text": "Political causes of WWI include the system of alliances (Triple Entente vs. Triple Alliance) and rising nationalism across Europe. The assassination of Archduke Franz Ferdinand in Sarajevo in June 1914 was the immediate political trigger that activated the alliance system."
+    },
+    {
+      "id": "ref-military",
+      "kind": "reference",
+      "criterion_id": "military",
+      "text": "Military causes include militarism and the arms race, notably the Anglo-German naval rivalry, and rigid mobilization timetables such as the Schlieffen Plan, which made rapid escalation difficult to halt once begun."
+    },
+    {
+      "id": "ref-economic",
+      "kind": "reference",
+      "criterion_id": "economic",
+      "text": "Economic causes include imperial and colonial competition for territory and markets, and industrial and trade rivalry between the great powers, especially Britain and Germany, which fostered long-term hostility."
+    },
+    {
+      "id": "ref-evidence",
+      "kind": "reference",
+      "criterion_id": "evidence",
+      "text": "Strong answers support claims with specific, accurate historical evidence (named events, dates, treaties, or figures) rather than unsupported generalisation. Example: citing Anglo-German naval expansion to link militarism and economic rivalry."
+    },
+    {
+      "id": "guidance-partial",
+      "kind": "guidance",
+      "criterion_id": "",
+      "text": "Marking guidance: award MET when a factor is correctly identified and explained; PARTIAL when named but not explained or only implied; NOT_MET when absent or incorrect. Do not reward length, confident tone, or writing style — only content that satisfies the criterion."
+    }
+  ]
+}

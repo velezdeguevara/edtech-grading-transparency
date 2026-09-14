@@ -27,9 +27,9 @@ from src.common.human_review.review import (
     ReviewRoute,
     TeacherDecision,
 )
+from src.common.paths import reports_dir
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_AUDIT_DIR = REPO_ROOT / "reports" / "grading-audit"
+DEFAULT_AUDIT_DIR = reports_dir() / "grading-audit"
 
 
 def _utc_now_iso() -> str:

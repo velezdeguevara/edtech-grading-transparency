@@ -69,7 +69,7 @@ Force a mode with `INTERP_MODE=artifact|local|cloud`; it auto-detects and falls 
 | `docs/threat-model.md` | Adversarial & safety considerations | ✅ |
 | `src/common/grading/` | Shared schema, model-agnostic `Grader` interface, keyword baseline | ✅ |
 | `src/common/rubrics/` | Rubric + fixture loaders | ✅ |
-| `src/common/rag/` | Retrieval of rubric criteria / references | 🔲 planned |
+| `src/common/rag/` | Retrieval + grounding: BM25 default (stdlib), optional dense retriever, KB loader, prompt grounding | ✅ |
 | `src/common/human_review/` | Routing (auto-accept vs escalate), teacher approve/override, append-only audit log, override-rate summary | ✅ |
 | `src/track_a_interpretable/` | Interp backends (artifact / torch), escalation logic, interpretable grader | ✅ |
 | `src/track_b_explainable/` | Vendor-neutral grader + OpenAI-compatible / mock providers | ✅ |
@@ -90,14 +90,15 @@ Legend: ✅ implemented · ◑ partial/stub · 🔲 planned
 
 ## Status
 
-**Implemented and tested (47 passing tests):** the shared grading contract and rubric/fixture
+**Implemented and tested (59 passing tests):** the shared grading contract and rubric/fixture
 loaders; the full eval suite (agreement, calibration, bias-fairness, and the H3 escalation
 eval); the vendor-neutral Track B grader (mock default + OpenAI-compatible provider); the
 Track A interpretability groundwork (artifact backend for Mode 1, torch-lazy backend for
-Modes 2/3, escalation policy, and the interpretable grader that flags spurious-reliance); and
-the human-in-the-loop review layer (routing, teacher approve/override, append-only audit log,
-override-rate summary) with a stdlib CLI demo (`python -m ui.review_cli`).
+Modes 2/3, escalation policy, and the interpretable grader that flags spurious-reliance); the
+human-in-the-loop review layer (routing, teacher approve/override, append-only audit log,
+override-rate summary) with a stdlib CLI demo (`python -m ui.review_cli`); and the RAG layer
+(BM25 retriever + knowledge base + prompt grounding, with an optional dense retriever tier).
 
-**Planned next:** the RAG layer, the `robustness` eval, real model runs (Track B via API;
-Track A/Mode 3 via the cloud notebook to replace placeholder artifacts with genuine Gemma
-captures), and an optional visual sandbox UI.
+**Planned next:** the `robustness` eval, real model runs (Track B via API; Track A/Mode 3 via
+the cloud notebook to replace placeholder artifacts with genuine Gemma captures), and an
+optional visual sandbox UI.

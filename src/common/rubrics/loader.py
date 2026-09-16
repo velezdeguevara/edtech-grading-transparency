@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass
 
 from src.common.grading.schema import (
     CriterionOutcome,
@@ -13,6 +14,14 @@ from src.common.grading.schema import (
 from src.common.paths import data_dir
 
 DATA_DIR = data_dir()
+
+
+@dataclass(frozen=True)
+class AdversarialExample:
+    """A GradedExample plus the attack category it represents (for robustness eval)."""
+
+    example: GradedExample
+    attack_type: str
 
 
 def load_rubric(rubric_id: str) -> Rubric:
@@ -46,3 +55,26 @@ def load_fixtures(rubric_id: str) -> list[GradedExample]:
             )
         )
     return examples
+
+
+def load_adversarial_fixtures(rubric_id: str) -> list[AdversarialExample]:
+    """Load adversarial fixtures (with attack_type) for the robustness eval."""
+    path = DATA_DIR / "fixtures" / f"{rubric_id}.adversarial.json"
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    out: list[AdversarialExample] = []
+    for ex in raw["examples"]:
+        outcomes = {
+            cid: CriterionOutcome(val) for cid, val in ex["teacher_outcomes"].items()
+        }
+        out.append(
+            AdversarialExample(
+                example=GradedExample(
+                    id=ex["id"],
+                    rubric_id=raw["rubric_id"],
+                    answer_text=ex["answer_text"],
+                    teacher_outcomes=outcomes,
+                ),
+                attack_type=ex.get("attack_type", "unknown"),
+            )
+        )
+    return out

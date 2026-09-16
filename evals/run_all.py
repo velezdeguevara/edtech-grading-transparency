@@ -15,9 +15,14 @@ from evals.agreement.metric import evaluate_agreement
 from evals.auditability.metric import evaluate_escalation
 from evals.bias_fairness.metric import evaluate_bias_fairness
 from evals.calibration.metric import evaluate_calibration
+from evals.robustness.metric import evaluate_robustness
 from src.common.grading.keyword_baseline import KeywordBaselineGrader
 from src.common.grading.schema import Grader
-from src.common.rubrics.loader import load_fixtures, load_rubric
+from src.common.rubrics.loader import (
+    load_adversarial_fixtures,
+    load_fixtures,
+    load_rubric,
+)
 from src.track_a_interpretable.grader import InterpretableGrader
 
 RUBRIC_ID = "ss-wwi-causes-v1"
@@ -36,6 +41,10 @@ def run_all(grader: Grader, rubric_id: str = RUBRIC_ID) -> None:
     print("\n--- Bias / fairness ---")
     print(evaluate_bias_fairness(grader, rubric, examples).summary())
 
+    print("\n--- Robustness (adversarial) ---")
+    adversarial = load_adversarial_fixtures(rubric_id)
+    print(evaluate_robustness(grader, rubric, adversarial).summary())
+
 
 def run_escalation(rubric_id: str = RUBRIC_ID) -> None:
     """Track A: interpretability-driven escalation vs. confidence-only baseline (H3)."""
@@ -46,13 +55,24 @@ def run_escalation(rubric_id: str = RUBRIC_ID) -> None:
     print(evaluate_escalation(grader, rubric, examples).summary())
 
 
+def run_track_a_robustness(rubric_id: str = RUBRIC_ID) -> None:
+    """Track A robustness with escalation-catch on adversarial cases (defence-in-depth)."""
+    rubric = load_rubric(rubric_id)
+    adversarial = load_adversarial_fixtures(rubric_id)
+    grader = InterpretableGrader()
+    print(f"\n--- Track A robustness (backend: {grader.backend.mode}) ---")
+    print(evaluate_robustness(grader, rubric, adversarial).summary())
+
+
 def main() -> None:
     print("=== Full eval suite (baseline grader) ===\n")
     run_all(KeywordBaselineGrader())
     run_escalation()
+    run_track_a_robustness()
     print(
         "\nBaseline is intentionally naive; results establish a floor the real "
-        "Track A / Track B graders must beat."
+        "Track A / Track B graders must beat. Robustness measures resistance to a "
+        "taxonomy of KNOWN attacks — it is not a safety guarantee (see threat-model)."
     )
 
 

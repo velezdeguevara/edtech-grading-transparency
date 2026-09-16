@@ -74,6 +74,11 @@ class ProposedGrade:
     # Optional signal from Track A interpretability: True means the grade appears to
     # rely on spurious features and should be escalated regardless of confidence.
     spurious_reliance_flag: bool = False
+    # Security signal: True means a pre-grading defence layer (see src/common/security/)
+    # detected a likely prompt-injection / attack in the student text. Kept DISTINCT
+    # from spurious_reliance_flag so audits/reports can tell "gamed the content" apart
+    # from "attempted an attack". A detection escalates to a human — it is never final.
+    security_violation: bool = False
     notes: str = ""
 
     def total_points(self, rubric: Rubric) -> float:

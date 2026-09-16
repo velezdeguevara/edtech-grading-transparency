@@ -50,6 +50,8 @@ class ReviewRequest:
     escalation: EscalationDecision | None = None
 
     def escalate_reason(self) -> str:
+        if self.proposed.security_violation:
+            return "security violation (likely prompt injection) detected"
         if self.escalation is not None:
             return self.escalation.reason
         if self.proposed.spurious_reliance_flag:
@@ -90,6 +92,8 @@ def route(request: ReviewRequest) -> ReviewRoute:
     achievable by forcing escalation (see ``route_all_to_human``).
     """
     if request.proposed.spurious_reliance_flag:
+        return ReviewRoute.ESCALATE_TO_HUMAN
+    if request.proposed.security_violation:
         return ReviewRoute.ESCALATE_TO_HUMAN
     if request.escalation is not None and request.escalation.escalate:
         return ReviewRoute.ESCALATE_TO_HUMAN

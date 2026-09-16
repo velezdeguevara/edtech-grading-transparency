@@ -53,6 +53,7 @@ def build_record(
         "route": route.value,
         "escalate_reason": request.escalate_reason(),
         "spurious_reliance_flag": request.proposed.spurious_reliance_flag,
+        "security_violation": request.proposed.security_violation,
         "proposed_outcomes": proposed_outcomes,
         "proposed_total": request.proposed.total_points(rubric),
         "min_confidence": request.proposed.min_confidence(),

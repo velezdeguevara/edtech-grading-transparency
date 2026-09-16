@@ -1,0 +1,17 @@
+# Optional SECURITY dependencies — Layer 2 (prompt-injection classifier) ONLY.
+#
+# NOT required to run the repository. Security Layer 1 (deterministic sanitization +
+# nonce spotlighting in src/common/security/sanitize.py) is pure standard library and
+# always active. Install these only to enable the optional local injection classifier
+# (src/common/security/guardrail.py):
+#
+#     pip install -r requirements-security.txt
+#
+# The model is downloaded at runtime from Hugging Face on first use (cached), not by
+# pip. Default: protectai/deberta-v3-small-prompt-injection-v2 (CPU-friendly).
+#
+# NOTE: this is one defence layer, not a guarantee — prompt injection is an open
+# problem and classifiers can be evaded. Detections must escalate to a human.
+
+transformers>=4.42.0
+torch>=2.0.0

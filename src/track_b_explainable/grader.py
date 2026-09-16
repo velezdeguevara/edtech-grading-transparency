@@ -68,11 +68,18 @@ class ExplainableGrader(Grader):
             if result.context_block:
                 grounding_block = f"{result.context_block}\n\n"
 
+        # Security Layer 1: sanitize the untrusted answer and wrap it in a per-call
+        # random nonce with a spotlighting instruction, instead of a static (escapable)
+        # <STUDENT_ANSWER> tag. See src/common/security/sanitize.py.
+        from src.common.security.sanitize import spotlight
+
+        spot = spotlight(answer_text)
+
         return (
             f"QUESTION:\n{rubric.question}\n\n"
             f"RUBRIC_CRITERIA:\n{criteria_block}\n\n"
             f"{grounding_block}"
-            f"<STUDENT_ANSWER>\n{answer_text}\n</STUDENT_ANSWER>\n\n"
+            f"{spot.rendered()}\n\n"
             "Grade the answer against each criterion and return the JSON object."
         )
 

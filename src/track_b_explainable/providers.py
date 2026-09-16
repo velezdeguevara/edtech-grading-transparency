@@ -63,7 +63,7 @@ class MockProvider:
     name = "mock"
 
     def complete(self, system_prompt: str, user_prompt: str) -> str:
-        answer = _extract_block(user_prompt, "STUDENT_ANSWER")
+        answer = _extract_spotlighted_answer(user_prompt)
         criterion_ids = _extract_criterion_ids(user_prompt)
         low = answer.lower()
 
@@ -163,6 +163,23 @@ def _extract_block(text: str, tag: str) -> str:
     """Extract the content between <tag> ... </tag> markers, if present."""
     m = re.search(rf"<{tag}>(.*?)</{tag}>", text, flags=re.DOTALL)
     return m.group(1).strip() if m else ""
+
+
+def _extract_spotlighted_answer(text: str) -> str:
+    """Extract the student answer from a nonce-spotlighted block.
+
+    The prompt wraps the answer between ``<NONCE_xxxx_START>`` and
+    ``<NONCE_xxxx_END>`` (security Layer 1). Falls back to the legacy
+    ``<STUDENT_ANSWER>`` tag for backwards compatibility.
+    """
+    m = re.search(
+        r"^<(NONCE_[0-9a-f]+)_START>$(.*?)^<\1_END>$",
+        text,
+        flags=re.DOTALL | re.MULTILINE,
+    )
+    if m:
+        return m.group(2).strip()
+    return _extract_block(text, "STUDENT_ANSWER")
 
 
 def _extract_criterion_ids(text: str) -> list[str]:

@@ -32,7 +32,7 @@ Both tracks share the same scaffolding (`src/common`) and the **same evaluation 
 ```bash
 pip install -r requirements.txt          # numpy, einops, jaxtyping, pytest
 python -m evals.run_all                   # runs the full eval suite + escalation demo
-python -m pytest -q                       # 36 tests
+python -m pytest -q                       # 90 tests
 ```
 
 `run_all` scores a baseline grader (agreement / calibration / bias-fairness) and then runs
@@ -79,7 +79,7 @@ Force a mode with `INTERP_MODE=artifact|local|cloud`; it auto-detects and falls 
 | `interpretability/` | Cloud notebook + technique write-ups (logit lens, SAEs, patching, attention) | ◑ notebook stub; techniques planned |
 | `data/` | Example rubrics + **synthetic** fixtures + placeholder interp artifacts | ✅ |
 | `ui/` | Stdlib CLI demo of the human-review flow (`python -m ui.review_cli`); optional visual sandbox is future | ◑ CLI demo; visual sandbox planned |
-| `reports/` | Interp findings + grading-audit / comparison write-ups | 🔲 planned |
+| `reports/` | Stakeholder reports (`python -m src.common.reporting.generate`): grading-audit summary, Track comparison, rubric-optimization signals, interp findings | ✅ |
 
 Legend: ✅ implemented · ◑ partial/stub · 🔲 planned
 
@@ -91,7 +91,7 @@ Legend: ✅ implemented · ◑ partial/stub · 🔲 planned
 
 ## Status
 
-**Implemented and tested (79 passing tests):** the shared grading contract and rubric/fixture
+**Implemented and tested (90 passing tests):** the shared grading contract and rubric/fixture
 loaders; the full eval suite (agreement, calibration, bias-fairness, auditability/H3
 escalation, and robustness); the vendor-neutral Track B grader (mock default + OpenAI-compatible
 provider); the Track A interpretability groundwork (artifact backend for Mode 1, torch-lazy
@@ -99,12 +99,15 @@ backend for Modes 2/3, escalation policy, and the interpretable grader that flag
 spurious-reliance); the human-in-the-loop review layer (routing, teacher approve/override,
 append-only audit log, override-rate summary) with a stdlib CLI demo (`python -m ui.review_cli`);
 the RAG layer (BM25 retriever + knowledge base + prompt grounding, with an optional dense
-retriever tier); and the security defence-in-depth layer (Layer 1 sanitization + nonce
-spotlighting, optional Layer 2 injection classifier, escalate-on-detection). The robustness eval
+retriever tier); the security defence-in-depth layer (Layer 1 sanitization + nonce
+spotlighting, optional Layer 2 injection classifier, escalate-on-detection); and the
+stakeholder reporting layer (`python -m src.common.reporting.generate`) that turns the eval
+suite + audit log into four role-oriented reports (auditor, product owner, content author,
+researcher), each with explicit honesty framing (placeholder artifacts labelled, baseline
+framed as a floor, defence-in-depth not a guarantee). The robustness eval
 and security layers measure resistance to a *taxonomy of known* attacks and are **not** a safety
 guarantee — prompt injection is an open problem, addressed by defence-in-depth (see
 `src/common/security/README.md`, `evals/robustness/README.md`, and `docs/threat-model.md`).
 
-**Planned next:** stakeholder reporting (`reports/`), real model runs (Track B via API; Track
-A/Mode 3 via the cloud notebook to replace placeholder artifacts with genuine Gemma captures),
-and an optional visual sandbox UI.
+**Planned next:** real model runs (Track B via API; Track A/Mode 3 via the cloud notebook to
+replace placeholder artifacts with genuine Gemma captures), and an optional visual sandbox UI.
